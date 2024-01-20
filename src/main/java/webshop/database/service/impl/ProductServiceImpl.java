@@ -15,6 +15,7 @@ import webshop.controller.dto.ProductDto;
 import webshop.database.entity.ProductDAO;
 import webshop.database.entity.StockDAO;
 import webshop.database.entity.SupplierDAO;
+import webshop.database.exception.NoProductFoundException;
 import webshop.database.repository.ProductRepository;
 import webshop.database.service.ProductService;
 
@@ -50,8 +51,8 @@ public class ProductServiceImpl implements ProductService {
 
 
   @Override
-  public ProductDto getProduct(long id) {
-    return ProductDto.of(productRepository.findById(id).get());
+  public ProductDto getProduct(long id) throws NoProductFoundException {
+    return ProductDto.of(productRepository.findById(id).orElseThrow(()->new NoProductFoundException()));
   }
 
   @Override
