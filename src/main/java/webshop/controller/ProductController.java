@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import webshop.controller.dto.ProductDto;
+import webshop.database.exception.NoProductFoundException;
 import webshop.database.service.ProductService;
 
 @Controller
@@ -28,7 +29,11 @@ public class ProductController {
 
   @GetMapping("/{id}")
   public ResponseEntity<?> getProductById(@PathVariable long id){
-    ProductDto product = productService.getProduct((int) id);
+    ProductDto product = null;
+    try {
+      product = productService.getProduct((int) id);
+    } catch (NoProductFoundException e) {
+    }
     return new ResponseEntity<>(product,HttpStatus.OK);
   }
 
