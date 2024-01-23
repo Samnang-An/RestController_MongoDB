@@ -1,6 +1,6 @@
 package webshop.database.service;
 
-import webshop.controller.dto.ProductDto;
+import webshop.database.service.dto.ProductDto;
 import webshop.database.exception.NoProductFoundException;
 
 public interface ProductService {

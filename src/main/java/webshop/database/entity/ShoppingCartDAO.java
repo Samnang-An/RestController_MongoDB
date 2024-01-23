@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
+import webshop.database.service.dto.ProductItemDto;
 
 @Document(collection = "shopping-cart")
 @Builder
@@ -22,5 +23,5 @@ public class ShoppingCartDAO {
   @Id
   private long id;
   private CustomerDAO customerDAO;
-  private List<ProductItemDAO> productItem;
+  private List<ProductItemDto> productItem;
 }

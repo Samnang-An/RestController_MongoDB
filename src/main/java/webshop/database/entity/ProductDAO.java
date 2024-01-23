@@ -9,6 +9,9 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
+import webshop.database.service.dto.ReviewDto;
+import webshop.database.service.dto.StockDto;
+import webshop.database.service.dto.SupplierDto;
 
 @Document(collection = "product")
 @Builder
@@ -26,8 +29,8 @@ public class ProductDAO {
   private String description;
   private double price;
 
-  private List<ReviewDAO> reviewList;
-  private StockDAO stock;
-  private SupplierDAO supplier;
+  private List<ReviewDto> reviewList;
+  private StockDto stock;
+  private SupplierDto supplier;
 
 }

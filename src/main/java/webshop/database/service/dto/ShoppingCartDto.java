@@ -1,4 +1,4 @@
-package webshop.controller.dto;
+package webshop.database.service.dto;
 
 import java.util.List;
 import lombok.Builder;
@@ -19,7 +19,7 @@ public class ShoppingCartDto {
     return ShoppingCartDto.builder()
         .id(shoppingCartDAO.getId())
         .customer(CustomerDto.of(shoppingCartDAO.getCustomerDAO()))
-        .productItem(ProductItemDto.of(shoppingCartDAO.getProductItem()))
+        .productItem(shoppingCartDAO.getProductItem())
         .build();
   }
 }
