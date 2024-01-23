@@ -7,15 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import webshop.controller.dto.ProductDto;
-import webshop.controller.dto.ShoppingCartDto;
 import webshop.database.exception.NoCustomerFoundException;
 import webshop.database.exception.NoProductFoundException;
-import webshop.database.service.ProductService;
 import webshop.database.service.ShoppingCartService;
+import webshop.database.service.dto.ShoppingCartDto;
 
 @Controller
 @RequestMapping("/cart")
@@ -25,17 +21,18 @@ public class ShoppingCartController {
   private ShoppingCartService shoppingCartService;
 
   @PostMapping("/add/{cusId}/{prodId}/{amount}")
-  public ResponseEntity<?> addProduct(@PathVariable long cusId,@PathVariable long prodId, @PathVariable int amount){
+  public ResponseEntity<?> addProduct(@PathVariable long cusId, @PathVariable long prodId,
+      @PathVariable int amount) {
     ShoppingCartDto shoppingCartDto = null;
     try {
-      shoppingCartDto = shoppingCartService.addToCart(cusId,prodId,amount);
+      shoppingCartDto = shoppingCartService.addToCart(cusId, prodId, amount);
     } catch (NoCustomerFoundException | NoProductFoundException e) {
     }
     return new ResponseEntity<>(shoppingCartDto, HttpStatus.OK);
   }
 
   @GetMapping("/{cusId}")
-  public ResponseEntity<?> getShoppingCart(@PathVariable long cusId){
+  public ResponseEntity<?> getShoppingCart(@PathVariable long cusId) {
     ShoppingCartDto shoppingCartDto = null;
     try {
       shoppingCartDto = shoppingCartService.getShoppingCart(cusId);

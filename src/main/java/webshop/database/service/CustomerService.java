@@ -1,6 +1,6 @@
 package webshop.database.service;
 
-import webshop.controller.dto.CustomerDto;
+import webshop.database.service.dto.CustomerDto;
 import webshop.database.exception.NoCustomerFoundException;
 
 public interface CustomerService {

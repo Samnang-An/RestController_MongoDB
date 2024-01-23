@@ -1,6 +1,7 @@
-package webshop.controller.dto;
+package webshop.database.service.dto;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -22,7 +23,7 @@ public class ProductDto {
   private String description;
   private double price;
 
-  private List<ReviewDto> reviewList;
+  private List<ReviewDto> reviewList = new ArrayList<>();
   private StockDto stock;
   private SupplierDto supplier;
 
@@ -35,10 +36,9 @@ public class ProductDto {
         .prodName(productDAO.getProdName())
         .description(productDAO.getDescription())
         .price(productDAO.getPrice())
-        .reviewList(
-            productDAO.getReviewList().stream().map(ReviewDto::of).collect(Collectors.toList()))
-        .stock(StockDto.of(productDAO.getStock()))
-        .supplier(SupplierDto.of(productDAO.getSupplier()))
+        .reviewList(productDAO.getReviewList())
+        .stock(productDAO.getStock())
+        .supplier(productDAO.getSupplier())
         .build();
   }
 
@@ -60,6 +60,4 @@ public class ProductDto {
     ObjectMapper objectMapper = new ObjectMapper();
     return "Product Items: {" + objectMapper.writeValueAsString(this) + "}";
   }
-
-
 }
